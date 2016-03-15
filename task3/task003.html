@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 20px;
+        }
+        body{padding: 0}
+        #body{
+            border:1px solid #999;
+            background-color: #eee;
+            position: relative;
+            overflow: auto;
+            clear: both;
+        }
+        #left{
+            width: 200px;
+            border:1px solid #999;
+            background-color: white;
+            float: left;
+        }
+        #left img{
+            height: 100px;
+            width: 100px;
+            float: left;
+            border:1px solid #999;
+            background-color: #eee;
+            padding: 0;
+        }
+        #mid{
+            border:1px solid #999;
+            margin-left: 260px;
+            margin-right: 200px;
+            position: absolute;
+        }
+        #right{
+            width: 120px;
+            border:1px solid #999;
+            float: right;
+            text-align: center;
+        }
+        #right img{
+            height: 80px;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+<div id="body">
+    <div id="mid">
+        PHP原始为Personal Home Page的缩写，已经正式更名为 "PHP: Hypertext Preprocessor"。注意不是“Hypertext Preprocessor”的缩写，这种将名称放到定义中的写法被称作递归缩写。PHP于1994年由Rasmus Lerdorf创建，刚刚开始是Rasmus Lerdorf为了要维护个人网页而制作的一个简单的用Perl语言编写的程序。这些工具程序用来显示 Rasmus Lerdorf 的个人履历，以及统计网页流量。后来又用C语言重新编写，包括可以访问数据库。他将这些程序和一些表单直译器整合起来，称为 PHP/FI。PHP/FI 可以和数据库连接，产生简单的动态网页程序。
+    </div>
+    <div id="left">
+        <img src="img.jpg" />
+        <span>Profile</span>
+    </div>
+    <div id="right">
+        <img src="img.jpg" />
+        <img src="img.jpg" />
+        <img src="img.jpg" />
+        <img src="img.jpg" />
+        <img src="img.jpg" />
+    </div>
+
+</div>
+</body>
+</html>
