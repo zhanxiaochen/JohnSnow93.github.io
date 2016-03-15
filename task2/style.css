@@ -23,6 +23,7 @@ body{
     height: 40px;
     line-height: 40px;
     font-size: 12px;
+    width: 50px;
 }
 .navlink li a{
     color: white;
