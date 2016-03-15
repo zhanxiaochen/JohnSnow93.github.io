@@ -15,7 +15,7 @@ body{
 }
 .navlink{
     float: right;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 .navlink li{
     float:left;
