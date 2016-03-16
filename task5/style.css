@@ -1,0 +1,127 @@
+*{
+    margin:0;
+    font-family: "Microsoft YaHei";
+}
+body{
+    background-color: #DEDEDE;
+}
+#head{
+    height: 60px;
+    background-color: #333;
+}
+#head img{
+    line-height: 60px;
+    margin-left: 20px;
+}
+.navlink{
+    float: right;
+    margin-right: 20px;
+}
+.navlink li{
+    float:left;
+    margin: 10px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+    width: 50px;
+}
+.navlink li a{
+    color: white;
+    text-decoration:none;;
+}
+.content{
+    border: 1px solid #D3D3D3;
+    margin: 20px;
+    background-color: white;
+    padding: 30px 20px;
+    box-shadow: 1px 1px  1px #737373;
+}
+.content *{margin:10px 0;}
+.content h4{color: #434343;}
+.content h5{color: #737373;}
+.content p{
+    text-indent: 2em;
+    line-height: 1.8em;
+}
+#list1{list-style: none;}
+.imgbox{
+    border: 1px solid #737373;
+    font-size: 10px;
+    height:180px;
+    width: 180px;
+    text-align: center;
+    margin:20px 50px;
+    display: inline-block;
+}
+.imgbox p{text-indent: 0}
+.imgbox img{
+    height: 100px;
+    width: 100px;
+}
+#tab{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+#tab th{
+    background-color: #333333;
+    color: white;
+}
+#tab td{
+    border: solid 1px #adadad;
+}
+#tr{
+    background-color: #adadad;
+}
+#side{
+    border-left: 5px solid #737373;
+    padding-left: 5px;
+}
+.tablel{
+    width: 40%;
+    text-align: right;
+}
+.tabler{
+    text-align: left;
+}
+#tab2{
+    width: 100%;
+    font-size: 13px;
+    border-spacing: 10px;
+}
+.tip{
+    font-size: 11px;
+    color: #737373;
+}
+#submit{
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    background-color: #3355D0;
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+#end{
+    background-color: black;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 10px;
+    color: white;
+}
+.vertical{
+    vertical-align: top;
+    line-height: 40px;
+}
+#main{
+    margin-right: 405px;
+}
+.sidebar{
+    width: 345px;
+    position: absolute;
+    right: 0;
+    top: 60px;
+}
