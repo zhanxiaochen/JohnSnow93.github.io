@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .row:before,.row:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+        [class*='col-']{
+            float: left;
+            width: 8.33%;
+            padding: 10px;
+        }
+        .container *{
+            box-sizing: border-box;
+        }
+        .content{
+            background-color: #eee;
+            border: 1px solid #999;
+            height: 50px;
+        }
+            .col-1{
+                width: 8.33%;
+            }
+            .col-2{
+                width: 16.66%;
+            }
+            .col-3{
+                width: 24.99%;
+            }
+            .col-4{
+                width: 33.32%;
+            }
+            .col-5{
+                width: 41.65%;
+            }
+            .col-6{
+                width: 50%;
+            }
+        @media screen and (max-width:768px) {
+            .col-s-6{
+                width: 50%;
+            }
+            .col-s-12{
+                width: 100%;
+            }
+            .col-s-2{
+                width: 16.66%;
+            }
+            .col-s-8{
+                width: 66.64%;
+            }
+            .col-s-3{
+                width: 24.99%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container" >
+    <div class="row">
+        <div class="col-4 col-s-6"><div class="content"></div></div>
+        <div class="col-4 col-s-6"><div class="content"></div></div>
+        <div class="col-4 col-s-12"><div class="content"></div></div>
+    </div>
+    <div class="row">
+        <div class="col-3"><div class="content"></div></div>
+        <div class="col-6"><div class="content"></div></div>
+        <div class="col-3"><div class="content"></div></div>
+    </div>
+    <div class="row">
+        <div class="col-1 col-s-2"><div class="content"></div></div>
+        <div class="col-1 col-s-2"><div class="content"></div></div>
+        <div class="col-2 col-s-8"><div class="content"></div></div>
+        <div class="col-2 col-s-3"><div class="content"></div></div>
+        <div class="col-6 col-s-3"><div class="content"></div></div>
+    </div>
+</div>
+</body>
+</html>
