@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+       body{
+            display: flex;
+            margin: 0;
+            padding: 10px;
+           align-items: center;
+           justify-content: space-between;
+        }
+        div{
+            width: 150px;
+            margin: 10px;
+        }
+        #box1,#box2,#box3{
+            border: #f00 1px solid;
+        }
+        #box1{
+            height: 120px;
+        }
+        #box2{
+            height: 100px;
+        }
+        #box3{
+            height: 40px;
+        }
+        #box4{
+            height: 200px;
+            border: #0f0 1px solid;
+        }
+        @media only screen and (max-width: 640px) {
+            body{
+                flex-wrap: wrap;
+            }
+            #box1{
+                order: 1;
+            }
+            #box2{
+                order: 2;
+            }
+            #box3{
+                order: 3;
+            }
+            #box4{
+                order: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="box1"></div>
+<div id="box2"></div>
+<div id="box3"></div>
+<div id="box4"></div>
+</body>
+</html>
