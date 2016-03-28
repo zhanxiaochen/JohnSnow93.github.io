@@ -67,7 +67,7 @@
 		data.sort(numsort)
 		function numsort(a,b)
 			{
-				return b[1]-a[1];
+				return a[1]-b[1];
 			}
 		return data;
     }
@@ -82,7 +82,7 @@
 		var change=['一','二','三','四','五','六','七'];
 		for(i=0;i<=data.length-1;i++){
 			var insert=document.createElement("li");
-			insert.innerHTML="<li>"+"第"+change[i]+"名:"+data[i][0]+"的空气质量:"+"<b>"+data[i][1]+"</b>"+"</li>";
+			insert.innerHTML="第"+change[i]+"名:"+data[i][0]+"的空气质量:"+"<b>"+data[i][1]+"</b>";
 		document.getElementById("resort").appendChild(insert);
 		}
     }
