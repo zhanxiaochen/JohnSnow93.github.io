@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 18</title>
+    <style>
+    li{
+		display:inline-block;
+		color=white;
+		}
+    </style>
+</head>
+<body>
+<input type="text" id="inputbox"/>
+<button id="leftin">左侧入</button>
+<button id="rightin">右侧入</button>
+<button id="leftout">左侧出</button>
+<button id="leftout">右侧出</button>
+<br/>
+<ul id="list">
+</ul>
+<script>
+	var lin=document.getElementById("leftin").onclick=function(){
+			var input=document.getElementById("inputbox").value.trim();
+			console.log(input);
+
+		}
+</script>
+</body>
+</html>
