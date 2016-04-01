@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name ="viewport" content ="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no,width=device-width">
+    <title>First Mobile Web Page</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Microsoft YaHei";
+        }
+        #main{
+            width: 100%;
+        }
+        #head{
+            color: #FFFFFF;
+            height: 114px;
+            background-color: #91D4DA;
+            border: none;
+            position: relative;
+            text-align: center;
+        }
+        #head img{
+            position: absolute;
+            top:28px;
+            left: 30px;
+        }
+        #head span{
+            position: absolute;
+            left: 70px;
+            top: 23px;
+            font-size: 40px;
+        }
+        #head h1{
+            line-height: 114px;
+            font-size: 55px;
+        }
+        #nav ul{
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-around;
+            color: #656565;
+            font-size:40px ;
+            list-style: none;
+            height: 116px;
+        }
+        #nav li{
+            border: 8px solid #FFFFFF;
+            height: 116px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 196px;
+        }
+        #sli{
+            border-bottom: solid 8px #91D4DA!important;
+            box-sizing: border-box;
+        }
+        #imgbox{
+            text-align: center;
+        }
+        #label{
+            height: 294px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .labelcontent{
+            height: 294px;
+            width: 118px;
+            font-size: 37px;
+            text-align: center;
+        }
+        .labelcontent img{
+            margin: 45px 0 30px;
+            display: block;
+        }
+        hr{
+            width: 95%;
+            margin: 0 auto 36px;
+        }
+        #divede{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            height: 410px;
+        }
+        .col{
+            text-align: center;
+            display: inline-block;
+        }
+        .colt1{
+            font-size: 50px;
+            color: #434343;
+        }
+        .colt2{
+            font-size: 32px;
+
+            color: #737373;
+        }
+        .hrf{
+            margin: 0 auto;
+            height: 35px;
+            background-color: #ccc;
+            width: 100%;
+            border: none;
+        }
+        .mod{
+            width: 95%;
+            margin: 0 auto;
+        }
+        .mod hr{
+            width: 100%;
+        }
+        #mtitle{
+            font-size: 46px;
+            color: #656565;
+            height: 115px;
+            line-height: 115px;
+        }
+        .mitem{
+            font-size: 36px;
+            display: inline-block;
+            background-color:#F8F8F8 ;
+            width: 320px;
+            height: 103px;
+            box-sizing: border-box;
+            text-align: center;
+            margin: 0 0 25px 25px;
+            color: #656565;
+            line-height: 103px;
+        }
+        .content img{
+            float: left;
+        }
+        #article{
+            height: 244px;
+        }
+        #article hr{
+            margin: 0 auto;
+        }
+        .passage{
+            height: 244px;
+            position: relative;
+        }
+        .passage img{
+            margin: 22px 30px;
+        }
+        .passage div{
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+            left: 342px;
+            top: 20px;
+        }
+        .ati1{
+            font-size: 40px;
+            color: #636363;
+        }
+        .ati2{
+            font-size: 32px;
+            color: #ccc;
+        }
+        #last{
+            width: 95%;
+            margin: 0 auto;
+        }
+        #last span{
+            display: inline-block;
+            margin: 26px 0;
+        }
+        #last img{
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="head"><img src="back.png"/><span>返回</span><h1>这是标题</h1></div>
+    <div id="nav"><ul><li>导航</li><li id="sli">导航</li><li>导航</li><li>导航</li><li>导航</li></ul></div>
+    <div id="imgbox"><img src="img.png"></div>
+    <div id="label">
+        <div class="labelcontent"><img src="item.png"><span>标签</span></div>
+        <div class="labelcontent"><img src="item.png"><span>标签</span></div>
+        <div class="labelcontent"><img src="item.png"><span>标签</span></div>
+        <div class="labelcontent"><img src="item.png"><span>标签</span></div>
+        <div class="labelcontent"><img src="item.png"><span>标签</span></div>
+    </div>
+    <hr />
+    <div id="divede">
+        <div class="col"><img src="col.png" /><br /><span class="colt1">分栏一</span><br /><span class="colt2">分栏小标题</span></div><img src="dived.png">
+        <div class="col"><img src="col.png" /><br /><span class="colt1">分栏一</span><br /><span class="colt2">分栏小标题</span></div><img src="dived.png">
+        <div class="col"><img src="col.png" /><br /><span class="colt1">分栏一</span><br /><span class="colt2">分栏小标题</span></div>
+    </div>
+    <hr class="hrf"/>
+    <div class="mod">
+        <span id="mtitle">模块1</span>
+        <hr />
+        <div class="content"><img src="mod.png"><span class="mitem">这是文案</span><span class="mitem">这是文案</span><br /><span class="mitem">这是文案</span><span class="mitem">这是文案</span></div>
+        <div class="content"><img src="mod.png"><span class="mitem">这是文案</span><span class="mitem">这是文案</span><br /><span class="mitem">这是文案</span><span class="mitem">这是文案</span></div>
+    </div>
+    <hr class="hrf"/>
+    <div class="mod">
+        <span id="mtitle">模块2</span>
+        <hr />
+        <div class="content"><img src="mod.png"><span class="mitem">这是文案</span><span class="mitem">这是文案</span><br /><span class="mitem">这是文案</span><span class="mitem">这是文案</span></div>
+        <div class="content"><img src="mod.png"><span class="mitem">这是文案</span><span class="mitem">这是文案</span><br /><span class="mitem">这是文案</span><span class="mitem">这是文案</span></div>
+    </div>
+    <hr class="hrf"/>
+    <div id="article">
+        <div class="passage"><img src="art.png"><div><span class="ati1">文章标题</span><br /><span class="ati2">文章来源 6分钟前</span></div></div>
+        <hr />
+        <div class="passage"><img src="art.png"><div><span class="ati1">文章标题</span><br /><span class="ati2">文章来源 6分钟前</span></div></div>
+        <hr />
+        <div id="last">
+            <span class="ati1">文章标题</span>
+            <br />
+            <img src="art.png" ><img src="art.png" ><img src="art.png" >
+            <br />
+            <span class="ati2">文章来源 6分钟前</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
