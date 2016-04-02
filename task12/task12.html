@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>任务12</title>
+</head>
+<style>
+    tr:nth-child(1){
+        color: #FFFFFF;
+        background-color: #434343!important;
+    }
+    tr:nth-child(even){
+        background-color: #4bff5f;
+    }
+    tr:nth-child(odd){
+        background-color: #FFFFFF;
+    }
+    @keyframes grow {
+        from{width: 50px}
+        to{width: 200px}
+    }
+    #ain{
+        width: 50px;
+        margin: 15px;
+    }
+    #ain:focus{
+        box-shadow: 0 0 1px 2px #4bff5f;
+        animation: grow 2s forwards;
+    }
+    * {
+        margin:0;
+        padding:0;
+    }
+    ul {
+        list-style:none;
+    }
+    #wrap {
+        position:relative;
+        width:500px;
+        height:300px;
+        border:1px solid #9cc5ef;
+        overflow:hidden;
+    }
+    #slider {
+        width:300%;
+        height:100%;
+        font:100px/300px Microsoft Yahei;
+        text-align:center;
+        color:#fff;
+        margin-left:0;
+        -webkit-animation:slide1 4s ease-out infinite;
+        position: absolute;
+        z-index: 5;
+    }
+    #slider li {
+        float:left;
+        width:500px;
+        height:100%;
+    }
+    #slider li:nth-child(1) {
+        background: #00ff00;
+    }
+
+    #slider li:nth-child(2) {
+        background: #00ac20;
+    }
+
+    #slider li:nth-child(3) {
+        background: #00710d;
+    }
+    @-webkit-keyframes slide1 {
+        0% { margin-left:0;}
+        23% { margin-left:0;}
+        33% { margin-left:-500px;}
+        56% { margin-left:-500px;}
+        66% { margin-left:-1000px;}
+        90% { margin-left:-1000px;}
+        100% {margin-left:0;}
+    }
+    @keyframes slide2 {
+        0% { margin-left:-500px;}
+        23% { margin-left:-500px;}
+        33% { margin-left:-1000px;}
+        56% { margin-left:-1000px;}
+        66% { margin-left:0;}
+        90% { margin-left:0;}
+        100% {margin-left:-500px;}
+    }
+    @keyframes slide3 {
+        0% { margin-left:-1000px;}
+        23% { margin-left:-1000px;}
+        33% { margin-left:0;}
+        56% { margin-left:0;}
+        66% { margin-left:-500px;}
+        90% { margin-left:-500px;}
+        100% {margin-left:-1000px;}
+    }
+    /*修改动画名称*/
+    #l01:checked ~ #wrap #slider {
+        -webkit-animation-name:slide1;
+    }
+
+    #l02:checked ~ #wrap #slider {
+        -webkit-animation-name:slide2;
+    }
+
+    #l03:checked ~ #wrap #slider {
+        -webkit-animation-name:slide3;
+    }
+    #l01:active ~ #wrap #slider {
+        -webkit-animation-name:none;
+        margin-left:0;
+    }
+    #l02:active ~ #wrap #slider {
+        -webkit-animation-name:none;
+        margin-left:-600px;
+    }
+    #l03:active ~ #wrap #slider {
+        -webkit-animation-name:none;
+        margin-left:-1200px;
+    }
+    #opts {
+        width:600px;
+        height:40px;
+        color:#fff;
+        text-align:center;
+        font:20px/40px Microsoft Yahei;
+        z-index: 9999;
+        position: absolute;
+        left: 370px;
+        bottom: 0;
+    }
+    #opts label {
+        float:left;
+        width:40px;
+        height:40px;
+        margin-right:4px;
+        background: #4bff5f;
+        cursor:pointer;
+    }
+    #opts label:hover {
+        background: #00710d;
+    }
+    #l01, #l02, #l03 {
+        display:none;
+    }
+</style>
+<body>
+<table>
+    <tbody>
+    <tr><th>排名</th><th>网站</th><th>热度</th></tr>
+    <tr><th>1</th><th>百度</th><th>100</th></tr>
+    <tr><th>2</th><th>腾讯</th><th>200</th></tr>
+    <tr><th>3</th><th>新浪</th><th>300</th></tr>
+    <tr><th>4</th><th>CCTV</th><th>400</th></tr>
+    <tr><th>5</th><th>CCGV</th><th>500</th></tr>
+    <tr><th>6</th><th>CCAV</th><th>600</th></tr>
+    </tbody>
+</table>
+<br />
+<input type="text" id="ain"/>
+<input type="radio" checked name="slider" id="l01">
+<input type="radio" name="slider" id="l02">
+<input type="radio" name="slider" id="l03">
+
+<div id="wrap">
+    <div id="opts">
+        <label for="l01">1</label>
+        <label for="l02">2</label>
+        <label for="l03">3</label>
+    </div>
+    <ul id="slider">
+        <li>Baidu</li>
+        <li>Google</li>
+        <li>Bing</li>
+    </ul>
+
+</div>
+
+</body>
+</html>
