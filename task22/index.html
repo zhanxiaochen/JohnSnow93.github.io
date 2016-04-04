@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            padding: 5px;
+            margin: 5px;
+            border: solid 1px #737373;
+            flex-grow: 1;
+            background-color: #FFFFFF;
+        }
+        #container{
+            margin: 10px auto;
+            width: 500px;
+            height: 150px;
+        }
+        .now{
+            background-color: #ff001a;
+        }
+    </style>
+</head>
+<body>
+<button onclick="start()">开始前序遍历</button>
+<div id="container">
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    </div>
+<script>
+    //绑定事件
+    var root=document.getElementById("container");
+    var data=[];//存放数据
+    //排序函数
+    function travel(ro){
+        data.push(ro);
+        if(ro.firstElementChild!=null)travel(ro.firstElementChild);
+        if(ro.lastElementChild!=null)travel(ro.lastElementChild);
+    }
+    //渲染函数
+    function startcolor(){
+        var i=0;
+        data[i].style.backgroundColor="green";
+        var clock=setInterval(function(){
+            if(i+1<=data.length-1){
+                data[i+1].style.backgroundColor="green";
+                data[i].style.backgroundColor="white";
+                i++;
+            }
+            else{
+                clearInterval(clock);
+                data[i].style.backgroundColor="white";
+            }
+        },500   );
+    }
+    //启动函数
+    function start(){
+        console.log("Enter Start Function");
+        travel(root);//开始遍历
+        console.log(data);
+        startcolor();
+    }
+</script>
+</body>
+</html>
