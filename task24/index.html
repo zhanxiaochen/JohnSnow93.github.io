@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            padding: 5px;
+            margin: 5px;
+            border: solid 1px #737373;
+            flex-grow: 1;
+            background-color: #FFFFFF;
+        }
+        #container{
+            margin: 10px auto;
+            width: 90%;
+            height: 150px;
+        }
+        .now{
+            background-color: #ff001a;
+        }
+        .del{
+            border: 2px solid red;
+        }
+        #hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="container"><span>Super</span>
+    <div><span>单机游戏</span>
+        <div><span>RPG</span>
+            <div><span>ARPG</span></div>
+            <div><span>SRPG</span></div>
+            <div><span>RPRG</span></div>
+        </div>
+        <div><span>AVG</span>
+        </div>
+    </div>
+    <div><span>网络游戏</span>
+        <div><span>Mind</span>
+            <div><span>PUZ</span></div>
+            <div><span>TCG</span></div>
+        </div>
+    </div>
+    <div><span>其他</span>
+        <div><span>MSC</span>
+        </div>
+        <div><span>SPG</span>
+        </div>
+        <div><span>RCG</span>
+        </div>
+    </div>
+    </div>
+<ul id="hide"></ul>
+<button onclick="start()">开始前序遍历</button>
+<button onclick="delnode(nowc)">删除选中</button><br>
+<input type="text" id="append"/>
+<button onclick="ins()">插入</button>
+<input type="text" id="befound"/>
+<button onclick="find()">查询</button>
+<script>
+    //绑定事件
+    var root=document.getElementById("container");
+    var data=[];//存放数据
+    //遍历函数
+    function travel(ro){
+        if(ro!=null){
+            data.push(ro);
+        }
+        else return;
+        var rof=ro.firstElementChild;
+        rof=rof.nextElementSibling;
+        var roc=ro.childElementCount;
+        if(rof!=null){travel(rof);}
+        for(i=1;i<=roc-2;i++){
+            if(rof.nextElementSibling){travel(rof.nextElementSibling);rof=rof.nextElementSibling}
+        }
+    }
+    //渲染函数
+    function startcolor(){
+        var i=0;
+        data[i].style.backgroundColor="green";
+        clock=setInterval(function(){
+            if(i+1<=data.length-1){
+                data[i+1].style.backgroundColor="green";
+                data[i].style.backgroundColor="white";
+                i++;
+            }
+            else{
+                clearInterval(clock);
+                data[i].style.backgroundColor="white";
+            }
+        },500);
+    }
+    //启动函数
+    function start(){
+        console.log("Enter Start Function");
+        travel(root);//开始遍历
+        startcolor();
+    }
+    //绑定点击事件
+    nowc=document.getElementById("hide");//防止后续属性设置出错,先赋值一个无关的元素
+    root.addEventListener("click",function(e){
+        if(e.target.nodeName!="SPAN"){      //防止span被选中
+            nowc.setAttribute("class","");
+            nowc=e.target;
+            nowc.setAttribute("class","del");
+        }
+        if(e.target.nodeName=="SPAN"){      //选中span的话,就选择span的父容器
+            nowc.setAttribute("class","");
+            nowc=e.target.parentNode;
+            nowc.setAttribute("class","del");
+        }
+    })
+    //删除节点的函数
+    function delnode(node){
+        if(node.getAttribute("class")!="hide"){node.parentNode.removeChild(node);}//隐藏节点不允许删除
+    }
+    //绑定的查找函数
+    var foundnode=document.getElementById("hide");//保存现在已经发现的节点
+    function find(){
+        foundnode.style.backgroundColor="white";
+        var fvalue=document.getElementById("befound").value.trim();
+        var spancollect=document.getElementsByTagName("span");
+        for(i=0;i<=spancollect.length-1;i++){
+            if(spancollect[i].innerText==fvalue){spancollect[i].parentNode.style.backgroundColor="pink";foundnode=spancollect[i].parentNode;}
+        }
+    }
+    //插入函数
+    function ins(){
+        var ivalue=document.getElementById("append").trim();
+        var insnode=document.createElement("div");
+        insnode.innerHTML="<span>"+ivalue+"</span>";
+        if(nowc.getAttribute("class")!="hide"){nowc.appendChild(insnode)}
+    }
+</script>
+</body>
+</html>
