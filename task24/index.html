@@ -133,7 +133,7 @@
     }
     //插入函数
     function ins(){
-        var ivalue=document.getElementById("append").trim();
+        var ivalue=document.getElementById("append").value.trim();
         var insnode=document.createElement("div");
         insnode.innerHTML="<span>"+ivalue+"</span>";
         if(nowc.getAttribute("class")!="hide"){nowc.appendChild(insnode)}
