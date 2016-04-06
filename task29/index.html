@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            font-family: "Microsoft YaHei";
+        }
+        input{
+            width: 150px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid #CCCCCC;
+        }
+        button{
+            border: none;
+            border-radius: 5px;
+            height: 30px;
+            width: 45px;
+            background-color:#1498FF;
+            color: white;
+        }
+        .correct{
+            border: 1px solid #00ff00;
+        }
+        .wrong{
+            border: 1px solid red;
+        }
+        .hide{
+            display: none;
+        }
+        .show{
+            display: inline-block;
+        }
+        span{
+            font-size: 13px;
+        }
+        #s1{color: #6E8095;}
+        #s2{color: #00ac20}
+        #s3{color: red}
+    </style>
+</head>
+<body>
+<label for="namev">名称</label><input id="namev" type="text">
+<button onclick="validate()">验证</button><br>
+<span id="s1">必填,长度为4-16个字符</span>
+<script>
+    function validate(){
+        var inputbox=document.getElementById("namev");
+        var nvalue=document.getElementById("namev").value.trim();
+        var tips=document.getElementById("s1");
+        console.log(nvalue)
+        if(nvalue.match(/\s/g)||nvalue==""){
+            tips.innerText="不能为空";
+            tips.style.color="red";
+            inputbox.style.borderColor="red"
+        }
+        else if(nvalue.match(/[\u4e00-\u9fa5]/g)){
+            if(nvalue.length<2||nvalue.length>8){
+                tips.innerText="长度为4-16个字符";
+                tips.style.color="red";
+                inputbox.style.borderColor="red"
+            }
+            else {
+                tips.innerText="格式正确";
+                tips.style.color="#00ac20";
+                inputbox.style.borderColor="#00ff00"
+        }
+        }
+        else if(nvalue.length<4||nvalue.length>16){
+            tips.innerText="长度为4-16个字符";
+            tips.style.color="red";
+            inputbox.style.borderColor="red"
+        }
+        else{
+            tips.innerText="格式正确";
+            tips.style.color="#00ac20";
+            inputbox.style.borderColor="#00ff00"
+        }
+    }
+</script>
+</body>
+</html>
