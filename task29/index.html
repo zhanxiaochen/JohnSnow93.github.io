@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -51,8 +51,8 @@
         var nvalue=document.getElementById("namev").value.trim();
         var tips=document.getElementById("s1");
         console.log(nvalue)
-        if(nvalue.match(/\s/g)||nvalue==""){
-            tips.innerText="不能为空";
+        if(nvalue.match(/\s/)||nvalue==""){
+            tips.innerText="名字不能为空或者包含空格";
             tips.style.color="red";
             inputbox.style.borderColor="red"
         }
