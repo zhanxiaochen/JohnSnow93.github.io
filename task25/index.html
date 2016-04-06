@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            display: flex;
+            align-items: stretch;
+            justify-content:flex-start;
+            padding: 1px;
+            margin: 5px;
+            border-radius: 6px;
+            flex-grow: 1;
+            flex-wrap: wrap;
+            background-color: #FFFFFF;
+            padding-left: 2em;
+        }
+        #container{
+            margin: 10px 10px;
+            width: 1px;
+        }
+        .now{
+            background-color: #ff001a;
+        }
+        .del{
+            border: 2px solid red;
+        }
+        #hide{
+            display: none;
+        }
+        .hide{
+            display: none;
+        }
+        span,.rec{
+            width: 4em;
+            color: #FFFFFF;
+            background-color: #015dd1;
+            padding: 4px;
+            border-radius: 5px;
+        }
+        .show{
+            display: flex;
+        }
+        span:hover{
+            background-color: #080e6a;
+        }
+        .found{
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+<button onclick="delnode(nowc)">删除选中</button><br>
+<input type="text" id="append"/>
+<button onclick="ins()">插入</button>
+<input type="text" id="befound"/>
+<button onclick="find()">查询</button>
+<div id="container"><span>Top</span>
+    <div><span>单机游戏</span>
+        <div><span>RPG</span>
+            <div><span>ARPG</span></div>
+            <div><span>SRPG</span></div>
+            <div><span>RPRG</span></div>
+        </div>
+        <div><span>AVG</span>
+        </div>
+    </div>
+    <div><span>网络游戏</span>
+        <div><span>Mind</span>
+            <div><span>PUZ</span></div>
+            <div><span>TCG</span></div>
+        </div>
+    </div>
+    <div><span>其他</span>
+        <div><span>MSC</span>
+        </div>
+        <div><span>SPG</span>
+        </div>
+        <div><span>RCG</span>
+        </div>
+    </div>
+    </div>
+<ul id="hide"><li></li></ul>
+
+<script>
+    //绑定事件
+    var root=document.getElementById("container");
+    var data=[];//存放数据
+    //遍历函数
+    function travel(ro){
+        if(ro!=null){
+            data.push(ro);
+        }
+        else return;
+        var rof=ro.firstElementChild;
+        rof=rof.nextElementSibling;
+        var roc=ro.childElementCount;
+        if(rof!=null){travel(rof);}
+        for(i=1;i<=roc-2;i++){
+            if(rof.nextElementSibling){travel(rof.nextElementSibling);rof=rof.nextElementSibling}
+        }
+    }
+    //隐藏函数
+    function startcolor(){
+        for(i=0;i<=data.length-1;i++){
+            data[i].setAttribute("class","hide")
+        }
+        data=[];
+
+    }
+    function startcolor2(){
+        for(i=0;i<=data.length-1;i++){
+            data[i].setAttribute("class","show")
+        }
+        data=[];
+    }
+    //显示与隐藏函数
+    function showorhide(node){
+        var nodechildnum=node.childElementCount;
+        var nodechild=node.firstElementChild.nextElementSibling;
+        if(nodechild.getAttribute("class")=="hide"){
+            for(j=1;j<=nodechildnum-1;j++){
+                travel(nodechild);
+                startcolor2();
+                console.log(j);
+                if(nodechild.nextElementSibling==null)break;
+                if(nodechild.nextElementSibling.nodeName=="DIV")nodechild=nodechild.nextElementSibling;
+            }
+        }
+        else{
+            for(j=1;j<=nodechildnum-1;j++){
+                travel(nodechild);
+                startcolor();
+                console.log(j);
+                if(nodechild.nextElementSibling==null)break;
+                if(nodechild.nextElementSibling.nodeName=="DIV")nodechild=nodechild.nextElementSibling;
+            }
+        }
+    }
+    //绑定点击事件
+    nowc=document.getElementById("hide");//防止后续属性设置出错,先赋值一个无关的元素
+    root.addEventListener("click",function(e){
+        if(e.target.nodeName!="SPAN"){      //防止span被选中
+            nowc.firstElementChild.setAttribute("class","rec");
+            nowc=e.target;
+            //下面调用显示与隐藏函数
+            showorhide(nowc);
+            nowc.firstElementChild.setAttribute("class","del rec")
+        }
+        if(e.target.nodeName=="SPAN"){      //选中span的话,就选择span的父容器
+            nowc.firstElementChild.setAttribute("class","rec");
+            nowc=e.target.parentNode;
+            //下面调用显示与隐藏函数
+            showorhide(nowc);
+            nowc.firstElementChild.setAttribute("class","del rec")
+        }
+    })
+    //删除节点的函数
+    function delnode(node){
+        if(node.getAttribute("class")!="hide"){node.parentNode.removeChild(node);}//隐藏节点不允许删除
+    }
+    //展开函数
+    function unfold(node){
+        if(node.parentNode.nodeName=="DIV"){
+            node.parentNode.setAttribute("class","show");
+            unfold(node.parentNode);
+        }
+    }
+    //绑定的查找函数
+    var foundnode=document.getElementById("hide");//保存现在已经发现的节点
+    function find(){
+        foundnode.setAttribute("class","rec");
+        var fvalue=document.getElementById("befound").value.trim();
+        var spancollect=document.getElementsByTagName("span");
+        for(i=0;i<=spancollect.length-1;i++){
+            if(spancollect[i].innerText==fvalue){spancollect[i].setAttribute("class","found");foundnode=spancollect[i]}
+        }
+        //展开节点父元素
+        unfold(foundnode);
+    }
+    //插入函数
+    function ins(){
+        var ivalue=document.getElementById("append").value.trim();
+        var insnode=document.createElement("div");
+        insnode.innerHTML="<span>"+ivalue+"</span>";
+        if(nowc.getAttribute("class")!="hide"){nowc.appendChild(insnode)}
+    }
+</script>
+</body>
+</html>
