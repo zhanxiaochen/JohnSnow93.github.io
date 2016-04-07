@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            font-family: "Microsoft YaHei";
+        }
+        input{
+            width: 150px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid #CCCCCC;
+        }
+        button{
+            border: none;
+            border-radius: 5px;
+            height: 30px;
+            width: 45px;
+            background-color:#1498FF;
+            color: white;
+        }
+        label{
+            display: inline-block;
+            width: 70px;
+        }
+        .correct{
+            border: 1px solid #00ff00;
+        }
+        .wrong{
+            border: 1px solid red;
+        }
+        .hide{
+            display: none;
+        }
+        .show{
+            display: inline-block;
+        }
+        span{
+            font-size: 13px;
+            color: #6E8095;
+            display: none;
+        }
+        span:focus{
+
+        }
+    </style>
+</head>
+<body>
+<label for="namev">名称</label><input id="namev" type="text"><br>
+<span id="nametip">必填,长度为4-16个字符</span><br>
+<label for="pass">密码</label><input id="pass" type="password"><br>
+<span id="passtip">输入密码</span><br>
+<label for="repass">密码确认</label><input id="repass" type="password"><br>
+<span id="repasstip">再次输入相同的密码</span><br>
+<label for="mail">Email</label><input id="mail" type="email"><br>
+<span id="mailtip">请输入邮箱地址</span><br>
+<label for="phone">手机</label><input id="phone" type="text"><br>
+<span id="phonetip">请输入手机号码</span><br>
+<button onclick="submit()">提交</button><br>
+<script>
+    var varifynumber;
+    function checkname(){
+        var inputbox=document.getElementById("namev");
+        var nvalue=document.getElementById("namev").value.trim();
+        var tips=document.getElementById("nametip");
+        console.log(nvalue)
+        if(nvalue.match(/\s/)||nvalue==""){
+            tips.innerText="名字不能为空或者包含空格";
+            tips.style.color="red";
+            inputbox.style.borderColor="red"
+        }
+        else if(nvalue.match(/[\u4e00-\u9fa5]/g)){
+            if(nvalue.length<2||nvalue.length>8){
+                tips.innerText="长度为4-16个字符";
+                tips.style.color="red";
+                inputbox.style.borderColor="red"
+            }
+            else {
+                tips.innerText="格式正确";
+                tips.style.color="#00ac20";
+                inputbox.style.borderColor="#00ff00"
+                varifynumber++;
+        }
+        }
+        else if(nvalue.length<4||nvalue.length>16){
+            tips.innerText="长度为4-16个字符";
+            tips.style.color="red";
+            inputbox.style.borderColor="red"
+        }
+        else{
+            tips.innerText="格式正确";
+            tips.style.color="#00ac20";
+            inputbox.style.borderColor="#00ac20";
+            varifynumber++
+        }
+    }
+    function passchek(){
+        var pw=document.getElementById("pass").value;
+        var pwtip=document.getElementById("passtip");
+        if(pw.match(/\s/)||pw==""){
+            pwtip.innerText="密码不能为空";
+            pwtip.style.borderColor="red";
+            pwtip.style.color="red";
+        }
+        else {
+            pwtip.innerText="密码可用";
+            pwtip.style.borderColor="#00ac20";
+            pwtip.style.color="#00ac20";
+            varifynumber++;}
+    }
+    function repasscheck(){
+        var pw=document.getElementById("pass").value;
+        var repw=document.getElementById("repass").value;
+        var repwtip=document.getElementById("repasstip");
+        if(pw==repw&&repw!=""){
+            repwtip.innerText="密码可用";
+            repwtip.style.borderColor="#00ac20";
+            repwtip.style.color="#00ac20";
+            varifynumber++;}
+        else {
+            repwtip.innerText="密码不匹配";
+            repwtip.style.borderColor="red";
+            repwtip.style.color="red";}
+    }
+    function mailcheck(){
+        var mail=document.getElementById("mail").value;
+        var mailtip=document.getElementById("mailtip");
+        var rex=/^[\w]+@([a-z0-9]+\.)+[a-z0-9]{2,4}$/i;
+        if(rex.test(mail)==true){
+            mailtip.innerText="邮箱正确";
+            mailtip.style.borderColor="#00ac20";
+            mailtip.style.color="#00ac20";
+            varifynumber++;}
+        else{
+            mailtip.innerText="邮箱输入有误";
+            mailtip.style.borderColor="red";
+            mailtip.style.color="red";
+        }
+    }
+    function phonecheck(){
+        var phone=document.getElementById("phone").value.trim();
+        var ptip=document.getElementById("phonetip");
+        if(phone.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)){
+            ptip.innerText="号码正确";
+            ptip.style.borderColor="#00ac20";
+            ptip.style.color="#00ac20";
+            varifynumber++;
+        }
+        else {
+            ptip.innerText="手机号码输入有误";
+            ptip.style.borderColor="red";
+            ptip.style.color="red";
+        }
+    }
+    function submit(){
+        varifynumber=0;
+        checkname();
+        document.getElementById("nametip").style.display="inline-block";
+        passchek();
+        document.getElementById("passtip").style.display="inline-block";
+        repasscheck();
+        document.getElementById("repasstip").style.display="inline-block";
+        mailcheck();
+        document.getElementById("mailtip").style.display="inline-block";
+        phonecheck();
+        document.getElementById("phonetip").style.display="inline-block";
+        console.log(varifynumber)
+        if(varifynumber>=5){
+            alert("输入合法")
+        }
+        else {alert("输入有误")}
+    }
+    //事件绑定
+    document.getElementById("namev").addEventListener("focus",function(){
+        document.getElementById("nametip").style.display="inline-block";
+        document.getElementById("namev").addEventListener("blur",checkname);
+    });
+    document.getElementById("pass").addEventListener("focus",function(){
+        document.getElementById("passtip").style.display="inline-block";
+        document.getElementById("pass").addEventListener("blur",passchek);
+    });
+    document.getElementById("repass").addEventListener("focus",function(){
+        document.getElementById("repasstip").style.display="inline-block";
+        document.getElementById("repass").addEventListener("blur",repasscheck);
+    });
+    document.getElementById("mail").addEventListener("focus",function(){
+        document.getElementById("mailtip").style.display="inline-block";
+        document.getElementById("mail").addEventListener("blur",mailcheck);
+    });
+    document.getElementById("phone").addEventListener("focus",function(){
+        document.getElementById("phonetip").style.display="inline-block";
+        document.getElementById("phone").addEventListener("blur",phonecheck);
+    });
+</script>
+</body>
+</html>
