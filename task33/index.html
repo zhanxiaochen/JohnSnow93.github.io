@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            display: flex;
+            flex-wrap: wrap;
+            height: 450px;
+            width: 450px;
+            border: 2px solid #2A2E3D;
+        }
+        .tab{
+            border: solid 1px #CCCCCC;
+            height: 45px;
+            width: 45px;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #robot{
+            position: relative;
+            height: 43px;
+            width: 43px;
+            background-color: red;
+        }
+        #up{
+            height: 30%;
+            background-color: #015dd1;
+        }
+        #left{
+            height: 100%;
+            width: 30%;
+            background-color: #015dd1;
+        }
+        #down{
+            position: absolute;
+            bottom: 0;
+            height: 30%;
+            width: 100%;
+            background-color: #015dd1;
+        }
+        #right{
+            float: right;
+            height: 43px;
+            width: 30%;
+            background-color: #015dd1;
+        }
+        .turnl{
+            animation: tl 1s forwards;
+        }
+        .turnr{
+            animation: tr 1s forwards;
+        }
+        .turnb{
+            animation: tb 1s forwards;
+        }
+        @keyframes tl{
+            from{transform:rotate(0deg)}
+            to{transform:rotate(-90deg)}
+
+        }
+        @keyframes tr{
+            from{transform:rotate(0deg)}
+            to{transform:rotate(90deg)}
+        }
+        @keyframes tb{
+            from{transform:rotate(0deg)}
+            to{transform:rotate(180deg)}
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+</div>
+<input type="text" value="GO" id="inputbox" autocomplete="on"/>
+<button onclick="execute()" id="button">执行</button>
+<script>
+    //获得容器
+    var container=document.getElementById("container");
+    //创建格子
+    for(i=1;i<=100;i++){
+        var id="box"+i;
+        var minibox=document.createElement("div");
+        minibox.setAttribute("class","tab");
+        minibox.setAttribute("id",id);
+        container.appendChild(minibox);
+    }
+    //创建机器人
+    var robot=document.createElement("div");
+    robot.setAttribute("id","robot");
+    var head=document.createElement("div");
+    head.setAttribute("id","up");
+    robot.appendChild(head);
+    document.getElementById("box54").appendChild(robot)
+    //暂存方向
+    var towarts=0;
+    //各种动作函数
+    function rogo(){
+        var pnode=robot.parentNode;
+        var pid=parseInt(pnode.getAttribute("id").substr(3));
+        function goup(){
+            if(pid<=10){alert("到达边界")}
+            else{
+                pnode.removeChild(robot);
+                var nowparentid=pid-10;
+                document.getElementById("box"+nowparentid).appendChild(robot);
+            }
+        }
+        function goleft(){
+            if(pid%10==1){alert("到达边界")}
+            else{
+                pnode.removeChild(robot);
+                var nowparentid=pid-1;
+                document.getElementById("box"+nowparentid).appendChild(robot);
+            }
+        }
+        function godown(){
+            if(pid>=91){alert("到达边界")}
+            else{
+                pnode.removeChild(robot);
+                var nowparentid=pid+10;
+                document.getElementById("box"+nowparentid).appendChild(robot);
+            }
+        }
+        function goright(){
+            if(pid%10==0){alert("到达边界")}
+            else{
+                pnode.removeChild(robot);
+                var nowparentid=pid+1;
+                document.getElementById("box"+nowparentid).appendChild(robot);
+            }
+        }
+        switch (towarts){
+            case 0:goup();break;
+            case 1:goleft();break;
+            case 2:godown();break;
+            case 3:goright();break;
+        }
+    }
+    function turnleft(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnl");
+        function end(){
+            if(towarts==3){
+                towarts=0;//注意!在右转的时候条件不同,数值要减小
+            }
+            else{towarts++;}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    function turnright(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnr");
+        function end(){
+            if(towarts==0){
+                towarts=3;
+            }
+            else{towarts--;}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    function turnback(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnb");
+        function end(){
+            if(towarts==0){
+                towarts=2;
+            }
+            else if(towarts==2){towarts=0}
+            else if(towarts==3){towarts=1}
+            else{towarts=towarts-2;}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    //执行函数
+    function execute(){
+        var order=document.getElementById("inputbox").value.trim().toLocaleUpperCase();
+        switch (order){
+            case "GO":rogo();break;
+            case "TUN LEF":turnleft();break;
+            case "TUN RIG":turnright();break;
+            case "TUN BAC":turnback();break;
+        }
+    }
+</script>
+</body>
+</html>
