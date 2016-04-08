@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<input type="radio" id="inschool" name="select"><label for="inschool">在校生</label>
+<input type="radio" id="outschool" name="select"><label for="outschool">非在校生</label>
+<div id="school" class="hide">
+    <label>学校</label>
+    <select id="city">
+        <option>北京</option>
+        <option>四川</option>
+    </select>
+    <select id="bcollege">
+        <option>北京大学</option>
+        <option>北京理工大学</option>
+        <option>清华大学</option>
+        <option>中国人民大学</option>
+        <option>中央财经大学</option>
+        <option>中国政法大学</option>
+        <option>中央民族大学</option>
+        <option>北京邮电大学</option>
+        <option>中国传媒大学</option>
+        <option>北京外国语大学</option>
+        <option>中央音乐学院</option>
+        <option>北京体育大学</option>
+        <option>中国人民大学财政金融学院</option>
+        <option>北京大学医学部</option>
+    </select>
+    <select id="scollege" class="hide">
+        <option>电子科技大学</option>
+        <option>西南交通大学</option>
+        <option>西南财经大学</option>
+        <option>四川农业大学</option>
+        <option>成都理工大学</option>
+        <option>四川师范大学</option>
+        <option>西南科技大学</option>
+        <option>西华师范大学</option>
+        <option>西南石油大学</option>
+        <option>西南民族大学</option>
+        <option>成都中医药大学</option>
+        <option>西华大学</option>
+        <option>成都信息工程学院</option>
+        <option>四川理工学院</option>
+        <option>泸州医学院</option>
+        <option>成都体育学院</option>
+        <option>四川音乐学院</option>
+    </select>
+</div>
+<div class="hide" id="job">
+    <label for="joblocation">就职单位</label>
+    <input type="text" id="joblocation">
+</div>
+<script>
+    var radio=document.getElementsByName("select");
+    console.log(radio);
+    function showschool(){
+        document.getElementById("job").style.display="none";
+        document.getElementById("school").style.display="block";
+    }
+    function showjob(){
+        document.getElementById("job").style.display="block";
+        document.getElementById("school").style.display="none";
+
+    }
+    radio[0].addEventListener("click",showschool);
+    radio[1].addEventListener("click",showjob);
+    function changecity(){
+        var bc=document.getElementById("bcollege");
+        var sc=document.getElementById("scollege");
+        console.log(document.getElementById("city").selectedIndex)
+        if(document.getElementById("city").selectedIndex==0){
+            bc.style.display="inline-block";
+            sc.style.display="none";
+        }
+        else if(document.getElementById("city").selectedIndex==1){
+            bc.style.display="none";
+            sc.style.display="inline-block";
+        }
+    }
+    var citys=document.getElementById("city").addEventListener("change",changecity)
+</script>
+</body>
+</html>
