@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            height: 450px;
+            width: 450px;
+            border: 2px solid #2A2E3D;
+        }
+        .tab{
+            border: solid 1px #CCCCCC;
+            height: 45px;
+            width: 45px;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #robot{
+            position: absolute;
+            box-sizing: border-box;
+            height: 45px;
+            width: 45px;
+            background-color: red;
+            left: 90px;
+            top: 90px;
+        }
+        #up{
+            width: 100%;
+            height: 30%;
+            background-color: #015dd1;
+        }
+        #left{
+            height: 100%;
+            width: 30%;
+            background-color: #015dd1;
+        }
+        #down{
+            position: absolute;
+            bottom: 0;
+            height: 30%;
+            width: 100%;
+            background-color: #015dd1;
+        }
+        #right{
+            float: right;
+            height: 100%;
+            width: 30%;
+            background-color: #015dd1;
+        }
+        .turnl{
+            animation: tl 1s forwards;
+        }
+        .turnr{
+            animation: tr 1s forwards;
+        }
+        .turnb{
+            animation: tb 1s forwards;
+        }
+        @keyframes tl{
+            from{transform:rotate(0deg)}
+            to{transform:rotate(-90deg)}
+        }
+        @keyframes tr{
+            from{transform:rotate(0deg)}
+            to{transform:rotate(90deg)}
+        }
+        @keyframes tb{
+            from{transform:rotate(0deg)}
+            to{transform:rotate(180deg)}
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+</div>
+<input type="text" value="GO" id="inputbox" autocomplete="on"/>
+<button onclick="execute()" id="button">执行</button>
+<script>
+    //获得容器
+    var container=document.getElementById("container");
+    //创建格子
+    for(i=1;i<=100;i++){
+        var id="box"+i;
+        var minibox=document.createElement("div");
+        minibox.setAttribute("class","tab");
+        minibox.setAttribute("id",id);
+        container.appendChild(minibox);
+    }
+    //创建机器人
+    var robot=document.createElement("div");
+    robot.setAttribute("id","robot");
+    var head=document.createElement("div");
+    head.setAttribute("id","up");
+    robot.appendChild(head);
+    container.appendChild(robot);
+    //暂存方向
+    var towarts=0;
+    //各种动作函数
+    function goup(){
+        if(window.getComputedStyle(robot).top=="0px"||window.getComputedStyle(robot).top=="1px")alert("到达边界");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowtop=parseInt(window.getComputedStyle(robot).top.replace(/[^0-9]/ig,""));
+                console.log(nowtop);
+                nowtop=nowtop-1;
+                robot.style.top=nowtop+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",505)
+        }
+    }
+    function goleft(){
+        if(window.getComputedStyle(robot).left=="0px"||window.getComputedStyle(robot).left=="1px")alert("到达边界");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowleft=parseInt(window.getComputedStyle(robot).left.replace(/[^0-9]/ig,""));
+                console.log(nowleft);
+                nowleft=nowleft-1;
+                robot.style.left=nowleft+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",505)
+        }
+    }
+    function godown(){
+        if(window.getComputedStyle(robot).top=="405px"||window.getComputedStyle(robot).top=="406px")alert("到达边界");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowtop=parseInt(window.getComputedStyle(robot).top.replace(/[^0-9]/ig,""));
+                console.log(nowtop);
+                nowtop=nowtop+1;
+                robot.style.top=nowtop+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",505)
+        }
+    }
+    function goright(){
+        if(window.getComputedStyle(robot).left=="405px"||window.getComputedStyle(robot).left=="404px")alert("到达边界");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowleft=parseInt(window.getComputedStyle(robot).left.replace(/[^0-9]/ig,""));
+                console.log(nowleft);
+                nowleft=nowleft+1;
+                robot.style.left=nowleft+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",505)
+        }
+    }
+    //动作选择函数
+    function rogo(){
+        switch (towarts){
+            case 0:goup();break;
+            case 1:goleft();break;
+            case 2:godown();break;
+            case 3:goright();break;
+        }
+    }
+    转动函数
+    function turnleft(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnl");
+        function end(){
+            if(towarts==3){
+                towarts=0;//注意!在右转的时候条件不同,数值要减小
+            }
+            else{towarts++;}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    function turnright(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnr");
+        function end(){
+            if(towarts==0){
+                towarts=3;
+            }
+            else{towarts--;}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    function turnback(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnb");
+        function end(){
+            if(towarts==0){
+                towarts=2;
+            }
+            else if(towarts==2){towarts=0}
+            else if(towarts==3){towarts=1}
+            else if(towarts==1){towarts=3}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    //移动函数
+    function movetop(){
+        switch (towarts){
+            case 0:rogo();break;
+            case 1:{turnright();setInterval("rogo",1001);break;};
+            case 2:{turnback();setInterval("rogo",1001);break;};
+            case 3:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    function moveback(){
+        switch (towarts){
+            case 2:rogo();break;
+            case 3:{turnright();setInterval("rogo",1001);break;};
+            case 0:{turnback();setInterval("rogo",1001);break;};
+            case 1:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    function moveleft(){
+        switch (towarts){
+            case 1:rogo();break;
+            case 2:{turnright();setInterval("rogo",1001);break;};
+            case 3:{turnback();setInterval("rogo",1001);break;};
+            case 0:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    function moverright(){
+        switch (towarts){
+            case 3:rogo();break;
+            case 0:{turnright();setInterval("rogo",1001);break;};
+            case 1:{turnback();setInterval("rogo",1001);break;};
+            case 2:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    //执行函数
+    function execute(){
+        var order=document.getElementById("inputbox").value.trim().toLocaleUpperCase();
+        switch (order){
+            case "GO":rogo();break;
+            case "TUN LEF":turnleft();break;
+            case "TUN RIG":turnright();break;
+            case "TUN BAC":turnback();break;
+            //下面是任务34新增的指令
+            case "TRA LEF":goleft();break;
+            case "TRA TOP":goup();break;
+            case "TRA RIG":goright();break;
+            case "TRA BOT":godown();break;
+            case "MOV LEF":moveleft();break;
+            case "MOV TOP":movetop();break;
+            case "MOV RIG":moverright();break;
+            case "MOV BOT":moveback();break;
+        }
+    }
+</script>
+</body>
+</html>
