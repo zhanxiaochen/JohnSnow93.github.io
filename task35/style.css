@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#container{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    height: 450px;
+    width: 450px;
+    border: 2px solid #2A2E3D;
+}
+.tab{
+    border: solid 1px #CCCCCC;
+    height: 45px;
+    width: 45px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+#robot{
+    position: absolute;
+    box-sizing: border-box;
+    height: 45px;
+    width: 45px;
+    background-color: red;
+    left: 90px;
+    top: 90px;
+}
+#up{
+    width: 100%;
+    height: 30%;
+    background-color: #015dd1;
+}
+#left{
+    height: 100%;
+    width: 30%;
+    background-color: #015dd1;
+}
+#down{
+    position: absolute;
+    bottom: 0;
+    height: 30%;
+    width: 100%;
+    background-color: #015dd1;
+}
+#right{
+    float: right;
+    height: 100%;
+    width: 30%;
+    background-color: #015dd1;
+}
+.turnl{
+    animation: tl 1s forwards;
+}
+.turnr{
+    animation: tr 1s forwards;
+}
+.turnb{
+    animation: tb 1s forwards;
+}
+@keyframes tl{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(-90deg)}
+}
+@keyframes tr{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(90deg)}
+}
+@keyframes tb{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(180deg)}
+}
+/*下面是task35部分*/
+#numberbox{
+    text-align: center;
+    background-color: #737373;
+    color: #FFFFFF;
+    overflow: hidden;
+}
+#commandbox{
+    background-color: #000000;
+    overflow: auto;
+    color: #FFFFFF;
+}
+.linenumber{
+    display: block;
+}

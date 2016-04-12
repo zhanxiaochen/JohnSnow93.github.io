@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="container">
+</div>
+    <textarea rows="8" cols="1" id="numberbox"></textarea><textarea rows="8" cols="30" id="commandbox"></textarea>
+    <br>
+    <button onclick="execute()" id="button">执行</button>
+    <button onclick="reset()" id="resetbuttion">重置</button>
+<script>
+    //获得容器
+    var container=document.getElementById("container");
+    //创建格子
+    for(i=1;i<=100;i++){
+        var id="box"+i;
+        var minibox=document.createElement("div");
+        minibox.setAttribute("class","tab");
+        minibox.setAttribute("id",id);
+        container.appendChild(minibox);
+    }
+    //创建机器人
+    var robot=document.createElement("div");
+    robot.setAttribute("id","robot");
+    var head=document.createElement("div");
+    head.setAttribute("id","up");
+    robot.appendChild(head);
+    container.appendChild(robot);
+    //暂存方向
+    var towarts=0;
+    //各种动作函数
+    function goup(){
+        if(window.getComputedStyle(robot).top=="0px"||window.getComputedStyle(robot).top=="1px");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowtop=parseInt(window.getComputedStyle(robot).top.replace(/[^0-9]/ig,""));
+                console.log(nowtop);
+                nowtop=nowtop-1;
+                robot.style.top=nowtop+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",470)
+        }
+    }
+    function goleft(){
+        if(window.getComputedStyle(robot).left=="0px"||window.getComputedStyle(robot).left=="1px");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowleft=parseInt(window.getComputedStyle(robot).left.replace(/[^0-9]/ig,""));
+                console.log(nowleft);
+                nowleft=nowleft-1;
+                robot.style.left=nowleft+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",470)
+        }
+    }
+    function godown(){
+        if(window.getComputedStyle(robot).top=="405px"||window.getComputedStyle(robot).top=="406px");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowtop=parseInt(window.getComputedStyle(robot).top.replace(/[^0-9]/ig,""));
+                console.log(nowtop);
+                nowtop=nowtop+1;
+                robot.style.top=nowtop+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",470)
+        }
+    }
+    function goright(){
+        if(window.getComputedStyle(robot).left=="405px"||window.getComputedStyle(robot).left=="404px");
+        else {
+            document.getElementById("button").disabled=true;
+            timer1=setInterval(function () {
+                var nowleft=parseInt(window.getComputedStyle(robot).left.replace(/[^0-9]/ig,""));
+                console.log(nowleft);
+                nowleft=nowleft+1;
+                robot.style.left=nowleft+"px";
+            },10);
+            setTimeout("clearInterval(timer1);document.getElementById('button').disabled=false;",470)
+        }
+    }
+    //动作选择函数
+    function rogo(){
+        switch (towarts){
+            case 0:goup();break;
+            case 1:goleft();break;
+            case 2:godown();break;
+            case 3:goright();break;
+        }
+    }
+    //转动函数
+    function turnleft(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnl");
+        function end(){
+            if(towarts==3){
+                towarts=0;//注意!在右转的时候条件不同,数值要减小
+            }
+            else{towarts++;}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    function turnright(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnr");
+        function end(){
+            if(towarts==0){
+                towarts=3;
+            }
+            else{towarts--;}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    function turnback(){
+        document.getElementById("button").disabled=true;
+        robot.setAttribute("class","turnb");
+        function end(){
+            if(towarts==0){
+                towarts=2;
+            }
+            else if(towarts==2){towarts=0}
+            else if(towarts==3){towarts=1}
+            else if(towarts==1){towarts=3}
+            robot.setAttribute("class","");
+            switch (towarts){
+                case 0:head.setAttribute("id","up");break;
+                case 1:head.setAttribute("id","left");break;
+                case 2:head.setAttribute("id","down");break;
+                case 3:head.setAttribute("id","right");break;
+            }
+            document.getElementById("button").disabled=false;
+        }
+        setTimeout(end,1000)
+    }
+    //移动函数
+    function movetop(){
+        switch (towarts){
+            case 0:rogo();break;
+            case 1:{turnright();setInterval("rogo",1001);break;};
+            case 2:{turnback();setInterval("rogo",1001);break;};
+            case 3:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    function moveback(){
+        switch (towarts){
+            case 2:rogo();break;
+            case 3:{turnright();setInterval("rogo",1001);break;};
+            case 0:{turnback();setInterval("rogo",1001);break;};
+            case 1:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    function moveleft(){
+        switch (towarts){
+            case 1:rogo();break;
+            case 2:{turnright();setInterval("rogo",1001);break;};
+            case 3:{turnback();setInterval("rogo",1001);break;};
+            case 0:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    function moverright(){
+        switch (towarts){
+            case 3:rogo();break;
+            case 0:{turnright();setInterval("rogo",1001);break;};
+            case 1:{turnback();setInterval("rogo",1001);break;};
+            case 2:{turnleft();setInterval("rogo",1001);break;};
+        }
+    }
+    //以下是任务35内容
+    //命令框添加编号函数
+    var linenumber=1;
+    var command=document.getElementById("commandbox");
+    var linebox=document.getElementById("numberbox");
+    command.addEventListener("keyup",function(event){
+        if(event.keyCode==13){
+            command.innerHTML=command.innerHTML+"\n";
+            linebox.innerHTML=linebox.innerHTML+linenumber.toString()+"\n";
+            linenumber++;
+        }
+    });
+    //重置函数
+    function reset(){
+        command.innerHTML="";
+        linebox.innerHTML="";
+    }
+    //实现同时滚动功能
+    command.addEventListener("scroll",function(){
+        var st=this.scrollTop;
+        linebox.scrollTop=st;
+    });
+    //拆分命令并执行
+    //存放命令的数组
+    function execute(){
+        var corder=[];
+        var order=command.value.toUpperCase().trim();
+        corder=order.split("\n");
+        console.log(corder);
+        var timecount=-500;
+        //命令执行数量处理逻辑
+        var orderprocess=[];
+        for(var i=0;i<=corder.length-1;i++){
+            if(corder[i].substring(0,2)!="GO"){
+                var orderhead=corder[i].substr(0,7);
+                var ordernumber=parseInt(corder[i].substr(8));
+                console.log(orderhead);
+                console.log(ordernumber);
+                if(corder[i].length==7){
+                    orderprocess.push(orderhead);
+                }
+                else {
+                    for(var j=0;j<=ordernumber-1;j++){
+                        orderprocess.push(orderhead);
+                    }
+                }
+            }
+            else {
+                var orderhead=corder[i].substr(0,2);
+                var ordernumber=parseInt(corder[i].substr(2));
+                console.log(orderhead);
+                console.log(ordernumber);
+                if(corder[i].length==2){
+                    orderprocess.push(orderhead);
+                }
+                else {
+                    for(var j=0;j<=ordernumber-1;j++){
+                        orderprocess.push(orderhead);
+                    }
+                }
+            }
+        }
+        //
+        //检测部分
+        testorder(corder,orderprocess);
+        //执行部分
+        for(var c=0;c<=orderprocess.length-1;c++){
+            switch (orderprocess[c]){
+                case "GO":{timecount=timecount+1500;setTimeout("rogo()",timecount);console.log(timecount);break;};
+                case "TUN LEF":{timecount=timecount+1500;setTimeout("turnleft()",timecount);console.log(timecount);break;};
+                case "TUN RIG":{timecount=timecount+1500;setTimeout("turnright()",timecount);console.log(timecount);break;};
+                case "TUN BAC":{timecount=timecount+1500;setTimeout("turnback()",timecount);console.log(timecount);break;};
+                //下面是任务34新增的指令
+                case "TRA LEF":{timecount=timecount+2000;setTimeout("goleft()",timecount);console.log(timecount);break;};
+                case "TRA TOP":{timecount=timecount+2000;setTimeout("goup()",timecount);console.log(timecount);break;};
+                case "TRA RIG":{timecount=timecount+2000;setTimeout("goright()",timecount);console.log(timecount);break;};
+                case "TRA BOT":{timecount=timecount+2000;setTimeout("godown()",timecount);console.log(timecount);break;};
+                case "MOV LEF":{timecount=timecount+2000;setTimeout("moveleft()",timecount);console.log(timecount);break;};
+                case "MOV TOP":{timecount=timecount+2000;setTimeout("movetop()",timecount);console.log(timecount);break;};
+                case "MOV RIG":{timecount=timecount+2000;setTimeout("moverright()",timecount);console.log(timecount);break;};
+                case "MOV BOT":{timecount=timecount+2000;setTimeout("moveback()",timecount);console.log(timecount);break;};
+            }
+        }
+        corder=[];
+        orderprocess=[];
+    }
+</script>
+</body>
+</html>
