@@ -1,0 +1,159 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 21</title>
+    <style>
+		*{
+			font-family: "Microsoft YaHei";
+		}
+		button{
+			border: none;
+			background-color:#1498FF;
+			height: 30px;
+			border-radius: 8px;
+			color: white;
+		}
+    li{
+		display:inline-block;
+		background-color: #1498ff;
+		color:#FFF;
+		padding:5px;
+		margin:5px;
+		border-radius: 5px;
+		}
+	li:hover{
+		background-color: #ff2126;
+	}
+	textarea,input{
+		border: 1px solid #1498FF;
+	}
+	textarea:focus,input:focus{
+		box-shadow: 0 0 1px 2px #1498ff;
+	}
+		input{
+			width: 180px;
+		}
+    </style>
+</head>
+<body>
+<label for="input">Tag:</label><input type="text" id="input" placeholder="输入Tag,回车或换行进行输入"/>
+<br/>
+<ul id="flist"></ul>
+<br/>
+<textarea rows="3" cols="30" id="inputbox" placeholder="可以使用空白字符,全角或半角的逗号及分号进行分割">体育,音乐,美食,飞机</textarea>
+<button id="leftin">确认输入</button>
+<br/>
+<ul id="list">
+</ul>
+<script>
+
+	var data=[];//定义存放数据的数组
+	var fdata=[];//存放tag数据的数组
+	var str="";//定义更新UL的字符串
+	var tagcontainer=document.getElementById("flist");
+	var container=document.getElementById("list");
+	var originnal="";//存放原来的li内容
+	//数据更新函数
+	function updata(){
+		str="";
+		for(i=0;i<=data.length-1;i++){
+			str=str+"<li"+" id='li-"+i+"'>"+data[i]+"</li>";
+		}
+		container.innerHTML=str;
+		//添加删除提示效果
+		var lipack=document.getElementsByTagName("li");
+		for(i=0;i<=lipack.length-1;i++){
+			lipack[i].onmouseover=function(){originnal=this.innerText;this.innerText="点击删除:"+this.innerText};
+			lipack[i].onmouseout=function(){this.innerText=originnal;originnal=""};
+		}
+		document.getElementById("inputbox").value="";
+	}
+	function updata2(){
+	/*	document.getElementById("input").value="";
+		if(fdata.length>=10){fdata.splice(9,fdata.length-10);}
+		if(dat.match(/\s+/g)){document.getElementById("input").value=""}*/
+		str2="";
+		for(i=0;i<=fdata.length-1;i++){
+			str2=str2+"<li"+" id='li-"+i+"'>"+fdata[i]+"</li>";
+		}
+		tagcontainer.innerHTML=str2;
+		//添加删除提示效果
+		var lipack=document.getElementsByTagName("li");
+		for(i=0;i<=lipack.length-1;i++){
+			lipack[i].onmouseover=function(){originnal=this.innerText;this.innerText="点击删除:"+this.innerText};
+			lipack[i].onmouseout=function(){this.innerText=originnal;originnal=""};
+		}
+	}
+	function cleartext(){
+		document.getElementById("input").setAttribute("value","")
+	}
+	//tag触发函数
+	function triggerf(){
+		//先写输入回车和换行的方法
+		if(event.keyCode==13||event.keyCode==9){
+			var taginput=this.value.trim();
+			this.value="";
+			if(fdata.length>=10){fdata.splice(0,1);}
+			taginput=deldouble(taginput,fdata);
+			if(taginput!="")fdata.push(taginput);
+			updata2();
+		}
+		else if(event.keyCode==188||event.keyCode==186||event.keyCode==32){
+			var taginput=this.value.trim();
+			this.value="";
+			if(taginput.substr(0,1)==","){
+				taginput=taginput.substr(1)
+			}
+			if(fdata.length>=10){fdata.splice(0,1);}
+			taginput=deldouble(taginput,fdata);
+			if(taginput!="")fdata.push(taginput);
+			updata2();
+
+		}
+	}
+	//tag事件绑定
+	var tag=document.getElementById("input").addEventListener("keydown",triggerf);
+	//事件绑定与处理
+	var lin=document.getElementById("leftin").onclick=function(){
+			var input=document.getElementById("inputbox").value.trim();
+			if(data.length>=10){data.splice(0,data.length-10);}
+			if(input.split(/\s|;|；|，|,/g).length>10){alert("输入数量超过了10个");return}
+			if(input==""){alert("输入不合法");return ;}
+			data=deldouble(input,data).concat(data);
+			updata();
+		};
+	//下面是点击删除的代码
+	container.addEventListener("click",function(e) {
+		liid = parseInt(e.target.getAttribute("id").substr(3));
+		console.log(liid);
+		data.splice(liid,1);
+		updata();
+	});
+	tagcontainer.addEventListener("click",function(e) {
+		liid = parseInt(e.target.getAttribute("id").substr(3));
+		console.log(liid);
+		fdata.splice(liid,1);
+		updata2();
+	});
+	//用于删除重复函数
+	function deldouble(dat,dat2){
+		var compare=dat.split(/\s|;|；|，|,/g);
+		var temp=[],r=0;
+		for(i=0;i<=compare.length-1;i++){
+			for(j=0;j<=dat2.length-1;j++){
+				if(compare[i]==dat2[j]){temp[r]=i;r++;}
+			}
+		}
+		//console.log(temp);
+		if(temp.length>0){
+			for(i=0;i<=temp.length-1;i++){
+				compare.splice(temp[i],1);
+			}
+		}
+		return compare;
+	}
+
+</script>
+</body>
+</html>
