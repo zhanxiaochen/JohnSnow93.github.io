@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            border: 15px solid #CCCCCC;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px auto;
+            background-color: #737373;
+        }
+    </style>
+</head>
+<body>
+<label>图片数量</label>
+<select>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+</select>
+<div id="container">
+</div>
+<div id="hide">
+    <img src="img1.jpg" />
+</div>
+<script src="js.js"></script>
+<script>
+    //切换图片数量
+    one();
+    var selectimg=document.getElementsByTagName("select")[0];
+    selectimg.addEventListener("change", function () {
+        document.getElementById("hide").innerHTML="";
+        document.getElementById("container").innerHTML="";
+        for(var i=0;i<=this.selectedIndex;i++){
+            var newimg=document.createElement("img");
+            j=i+1;
+            newimg.setAttribute("src","img"+j+".jpg");
+            document.getElementById("hide").appendChild(newimg);
+        }
+        switch (this.selectedIndex){
+            case 0:one();break;
+            case 1:two();break;
+            case 2:three();break;
+            case 3:four();break;
+            case 4:five();break;
+            case 5:six();break;
+        }
+    })
+</script>
+</body>
+</html>
