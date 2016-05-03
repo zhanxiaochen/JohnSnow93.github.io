@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        body{
+            overflow-x:hidden
+        }
+        button{
+            display: block;
+            margin: 5px auto;
+            border: none;
+            height: 30px;
+            width: 70px;
+            color: white;
+            background-color: #1498ff;
+            border-radius: 7px;
+        }
+        .imgline{
+            width: 100%;
+            display: flex;
+            box-sizing: border-box;
+            justify-content:flex-start;
+            flex-shrink: 1;
+            overflow: hidden;
+            flex-wrap: nowrap;
+        }
+        .image{
+            height: 100%;
+        }
+        .image:hover{
+            height: 100%;
+            opacity: 0.5;
+        }
+        .imgbox{
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+        .sw{
+            display: none;
+            position: fixed;
+            left: 0;
+            top:0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+        .showimg{
+            margin: auto auto;
+            opacity: 1.0;
+            border: 10px solid #CCCCCC;
+            border-radius: 5px;
+            max-height: 90%;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+
+</div>
+
+<script>
+</script>
+<script src="js.js">
+</script>
+</body>
+</html>
