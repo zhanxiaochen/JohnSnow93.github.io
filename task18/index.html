@@ -42,6 +42,7 @@
 			if(input==""){alert("输入不合法");return ;}
 			if(isNaN(input)){alert("输入不合法");return ;}		
 			data.splice(0,0,input);
+			//可用data.unshift(input);splice(0,0,input)表示把input添加到第0个位置
 			updata();
 		}
 	var rin=document.getElementById("rightin").onclick=function(){
