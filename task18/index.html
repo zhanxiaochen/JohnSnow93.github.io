@@ -27,6 +27,7 @@
 	var data=[];//定义存放数据的数组
 	var str="";//定义更新UL的字符串
 	var container=document.getElementById("list");
+	
 	//数据更新函数
 	function updata(){
 		str="";
@@ -55,19 +56,23 @@
 	var rout=document.getElementById("rightout").onclick=function(){
 			var input=document.getElementById("inputbox").value.trim();		
 			alert(data.pop());
+			//pop() 方法用于删除并返回数组的最后一个元素。
 			updata();
 		};
 	var lout=document.getElementById("leftout").onclick=function(){
 			var input=document.getElementById("inputbox").value.trim();		
 			alert(data.splice(0,1));
+			//splice(0,1)指从数组第0个开始删除一个元素
 			updata();
 		};
 
 	//下面是点击删除的代码
 	container.addEventListener("click",function(e) {
+		//getAttribute() 方法返回指定属性名的属性值。substr(3)从第4个元素截取到最后。
 		liid = parseInt(e.target.getAttribute("id").substr(3));
 		console.log(liid);
 		data.splice(liid,1);
+		//splice(liid,1)把第liid位的那个元素删除
 		updata();
 	});
 </script>
